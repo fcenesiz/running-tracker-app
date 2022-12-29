@@ -14,6 +14,7 @@ import com.fcenesiz.runningtrackerapp.other.Constants.ACTION_START_OR_RESUME_SER
 import com.fcenesiz.runningtrackerapp.other.Constants.MAP_ZOOM
 import com.fcenesiz.runningtrackerapp.other.Constants.POLYLINE_COLOR
 import com.fcenesiz.runningtrackerapp.other.Constants.POLYLINE_WIDTH
+import com.fcenesiz.runningtrackerapp.other.TrackingUtility
 import com.fcenesiz.runningtrackerapp.services.Polyline
 import com.fcenesiz.runningtrackerapp.services.TrackingService
 import com.fcenesiz.runningtrackerapp.ui.viewmodels.MainViewModel
@@ -33,6 +34,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     private var map: GoogleMap? = null
     private var isTracking = false
     private var pathPoints = mutableListOf<Polyline>()
+    private var currentTimeInMillis = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,6 +63,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             pathPoints = it
             addLatestPolyline()
             moveCameraToUser()
+        }
+
+        TrackingService.timeRunInMillis.observe(viewLifecycleOwner){
+            currentTimeInMillis = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(currentTimeInMillis, true)
+            binding.tvTimer.text = formattedTime
         }
     }
 
