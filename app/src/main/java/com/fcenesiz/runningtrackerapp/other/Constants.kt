@@ -6,6 +6,11 @@ object Constants {
 
     const val RUNNING_DATABASE_NAME = "running_db"
 
+    const val SHARED_PREFERENCES_NAME = "sharedPref"
+    const val KEY_FIRST_TIME_TOGGLE = "KEY_FIRST_TIME_TOGGLE"
+    const val KEY_NAME = "KEY_NAME"
+    const val KEY_WEIGHT = "KEY_WEIGHT"
+
     const val REQUEST_CODE_LOCATION_PERMISSION = 0
 
     const val ACTION_START_OR_RESUME_SERVICE = "ACTION_START_OR_RESUME_SERVICE"
